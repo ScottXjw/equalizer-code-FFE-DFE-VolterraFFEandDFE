@@ -1,2 +1,3 @@
 # Volterra_lms
-标题虽然Volterra_lms，也就是基于Volterra的LMS算法，但是其实也可以做设置就是lms算法
+#也可通过设置参数，来到达2阶Volterra_lms和lms算法
+#如果有疑问也可以通过QQ：1040945641联系。欢迎大家和我讨论均衡算法。
