@@ -1,9 +1,13 @@
 # README
 
-均衡器（均衡算法）Equalizer
+# 均衡器（均衡算法）Equalizer
 
 这个项目的主要目的是分享通信系统中基于训练序列的一些均衡器（均衡算法），以及一些自己的看法、经验。
 希望能够帮助到大家。
+
+如果有疑问的话，可以提交问题到 issues 中。
+
+‍
 
 ---
 
@@ -17,70 +21,39 @@
 
 ![9c15289c-4d27-4d7c-99f7-e2bbe7fc82f3](assets/9c15289c-4d27-4d7c-99f7-e2bbe7fc82f3-20230827164506-48q1k12.png "图1.1 FIR滤波器")
 
-&emsp;&emsp;前馈均衡器可以有效地补偿信号在传输过程中所受到的线性损伤，因此在通信系统中得到了广泛的应用。它的基本结构是一种称为有限冲击响应（Finite Impulse Response，FIR）滤波器，如图1.1所示。FIR滤波器的输出可以用以下方式表示
+&emsp;&emsp;前馈均衡器可以有效地补偿信号在传输过程中所受到的线性损伤，因此在通信系统中得到了广泛的应用。它的基本结构是一种称为有限冲击响应（Finite Impulse Response，FIR）滤波器，如图 1.1 所示。FIR 滤波器的输出可以用以下方式表示
 
 $$
 y(k)=\sum_{l=-n}^{n}{h(l)x(k-l)}
 $$
 
-其中，x(k)和y(k)分别为FIR滤波器在采样时刻k时的输入和输出信号。h=[h(-n) h(-(n-1))⋯h(n)]为抽头权重向量
+其中，x(k)和 y(k)分别为 FIR 滤波器在采样时刻 k 时的输入和输出信号。h=[h(-n) h(-(n-1))⋯h(n)]为抽头权重向量
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/0ad721ec-4bc3-4154-a191-93fdbfb0a5a0.png
-">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">图1.2 前馈均衡器</div>
-</center>
-</div>
+![0ad721ec-4bc3-4154-a191-93fdbfb0a5a0](assets/0ad721ec-4bc3-4154-a191-93fdbfb0a5a0-20230827164956-ge8g5ov.png "图1.2 前馈均衡器")
 
-&emsp;&emsp;图1.2显示了FFE的结构框图，其中包括FIR滤波器、判决器、输入信号x(k)、均衡后的信号y(k)、期望信号d(k)和误差信号e(k)。
+&emsp;&emsp;图 1.2 显示了 FFE 的结构框图，其中包括 FIR 滤波器、判决器、输入信号 x(k)、均衡后的信号 y(k)、期望信号 d(k)和误差信号 e(k)。
 
 > * **优点：有效补偿线性损伤；结构简单**
 > * **缺点：高频噪声增强；无法处理非线性失真**
 
 ### 2. 判决反馈均衡器（Decision Feedback Equalizer，DFE）
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/e840659f-a266-46f8-997c-c3b74b8edfb4.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">图2.1 判决反馈均衡器</div>
-</center>
-</div>
+![e840659f-a266-46f8-997c-c3b74b8edfb4 1](assets/e840659f-a266-46f8-997c-c3b74b8edfb4 1-20230827165030-uf551nq.png "图2.1 判决反馈均衡器")
 
-&emsp;&emsp;判决反馈均衡器是一种非线性均衡器，它的主要思想是将接收到的信号经过判决后，将判决信号延迟输入到滤波器中，通过滤波器输出的加权和来抵消符号间干扰（Symbol Interference，ISI）。DFE的数学公式如下：
+&emsp;&emsp;判决反馈均衡器是一种非线性均衡器，它的主要思想是将接收到的信号经过判决后，将判决信号延迟输入到滤波器中，通过滤波器输出的加权和来抵消符号间干扰（Symbol Interference，ISI）。DFE 的数学公式如下：
 
 $$
 y\left(k\right)=x\left(k\right)+\sum_{l=1}^{n}{h(l)d(k-l)}
 $$
 
-> * **优点：能处理非线性失真；DFE反馈的信号是无噪声的判决信号，均衡效果更好**
+> * **优点：能处理非线性失真；DFE 反馈的信号是无噪声的判决信号，均衡效果更好**
 > * **缺点：复杂性和计算量增大；对准确判决信号的依赖（会产生误差传播）**
 
-### 3. Volterra均衡器
+### 3. Volterra 均衡器
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/image-20230827163346423.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">图3.1 volterra均衡器</div>
-</center>
-</div>
+![image-20230827163346423](assets/image-20230827163346423-20230827165104-alf3uc7.png "图3.1 volterra均衡器")
 
-&emsp;&emsp;Volterra均衡器通过将输入信号展开为Volterra级数，然后将其输入到FIR滤波器中，使原本是线性结构的滤波器拥有了处理非线性失真的能力。在这里我们只展示三阶Volterra均衡器的（一般三阶就够了）。三阶Volterra均衡器结构如图3.1。y(k)是该均衡器的输出，x(k)是均衡器的输入信号，它们之间的关系如下：
+&emsp;&emsp;Volterra 均衡器通过将输入信号展开为 Volterra 级数，然后将其输入到 FIR 滤波器中，使原本是线性结构的滤波器拥有了处理非线性失真的能力。在这里我们只展示三阶 Volterra 均衡器的（一般三阶就够了）。三阶 Volterra 均衡器结构如图 3.1。y(k)是该均衡器的输出，x(k)是均衡器的输入信号，它们之间的关系如下：
 
 $$
 y\left(k\right)=\sum_{l_1=-L_1}^{L_1}{h_1\left(l_1\right)x\left(k-l_1\right)}+\sum_{l_1=-L_2}^{L_2}\sum_{l_2=-L_2}^{l_1}{h_2\left(l_1,l_2\right)\prod_{i=1}^{2}x\left(k-l_i\right)}\\+
@@ -93,31 +66,21 @@ $$
 
 ### 4. 最大似然序列估计（Maximum Likelihood Sequence Estimation，MLSE）
 
-&emsp;&emsp;MLSE的目标是找到最有可能产生接收信号的发送序列，以实现最佳的信号恢复性能。
+&emsp;&emsp;MLSE 的目标是找到最有可能产生接收信号的发送序列，以实现最佳的信号恢复性能。
 
 ​		**我说不出个所以然来，就不误导大家了。**
 
-> * **优点：在强ISI的信道中可以实现最佳的信号恢复性能；是非线性均衡器**
+> * **优点：在强 ISI 的信道中可以实现最佳的信号恢复性能；是非线性均衡器**
 > * **缺点：计算复杂度较高；存储需求；对信道估计误差比较敏感**
 
 ### 5. 查找表（Look-Up Table，LUT）
 
 &emsp;&emsp;该算法分为两步：
 
-1. 准备阶段：在使用LUT之前，需要事先计算并存储某个特定状态的结果。
-2. 查找过程：在运行时，当需要计算某个特定状态的结果时，通过输入的参数作为索引，在LUT表格中查找对应的结果。
+1. 准备阶段：在使用 LUT 之前，需要事先计算并存储某个特定状态的结果。
+2. 查找过程：在运行时，当需要计算某个特定状态的结果时，通过输入的参数作为索引，在 LUT 表格中查找对应的结果。
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/image-20230827160118409.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">图5.1 LUT原理</div>
-</center>
-</div>
+​![image-20230827160118409](assets/image-20230827160118409-20230827165140-hbh0j44.png "图5.1 LUT 原理")​
 
 > * **优点：提高计算速度；节省计算资源；**
 > * **缺点：存储空间需求大；需要更新和维护；精度也会限制性能**
@@ -132,29 +95,29 @@ $$
 
 ## 二、权重更新算法
 
-均衡器权重可以通过算法等进行更新。Least Mean Square（LMS）、Recursive Least Squares（RLS）、甚至机器学习中的更新算法（如Adam、SGD等）也可以。
+均衡器权重可以通过算法等进行更新。Least Mean Square（LMS）、Recursive Least Squares（RLS）、甚至机器学习中的更新算法（如 Adam、SGD 等）也可以。
 
 这里就说两种最常见的。不同的算法不会影响均衡器的性能，只会影响获得最优权重的时间。
 
-### 1. LMS算法
+### 1. LMS 算法
 
-LMS算法是一种基础的迭代优化算法，它通过梯度下降的思想来最小化误差。具体而言，对于第k个符号，假设其误差为
+LMS 算法是一种基础的迭代优化算法，它通过梯度下降的思想来最小化误差。具体而言，对于第 k 个符号，假设其误差为
 
 $$
 e\left(k\right)=d\left(k\right)-y(k)
 $$
 
-其中d(k)为期望信号，y(k)为均衡器实际输出。根据LMS算法的原理，第k+1次权重的更新公式可以表示为：
+其中 d(k)为期望信号，y(k)为均衡器实际输出。根据 LMS 算法的原理，第 k+1 次权重的更新公式可以表示为：
 
 $$
 h\left(k+1\right)=h\left(k\right)+2\mu e(k)x(k)
 $$
 
-式中，h(k)为第k次更新后的权重，x(k)为输入信号，$\ mu$为权重的更新步长，通常需要根据训练信号的幅度来进行调整。
+式中，h(k)为第 k 次更新后的权重，x(k)为输入信号，$\ mu$ 为权重的更新步长，通常需要根据训练信号的幅度来进行调整。
 
-### 2. RLS算法
+### 2. RLS 算法
 
-相比于LMS算法，RLS算法通过引入遗忘因子 $\lambda$ 和输入信号的确定性相关矩阵$R_D$来加速均衡器收敛。使用RLS算法，第 $k+1$次更新权重的步骤如下：
+相比于 LMS 算法，RLS 算法通过引入遗忘因子 $\lambda$ 和输入信号的确定性相关矩阵 $R_D$ 来加速均衡器收敛。使用 RLS 算法，第 $k+1$ 次更新权重的步骤如下：
 
 $$
 {S}_{D}({k})={R}_{D}^{-{1}}({k})\\
@@ -162,13 +125,13 @@ $$
 {h}\left(k+1\right)={h}\left(k\right)+{S}_{D}\left(k+1\right)e(k){x}(k)
 $$
 
-其中，$S_D(k)$为输入信号的确定性相关矩阵的逆矩阵。通过引入输入信号的相关信息，RLS算法能够更快地收敛，但是也需要付出更高的训练复杂度。
+其中，$S_D(k)$ 为输入信号的确定性相关矩阵的逆矩阵。通过引入输入信号的相关信息，RLS 算法能够更快地收敛，但是也需要付出更高的训练复杂度。
 
 ## 三、代码实现
 
-因为FFE、Volterra均衡器、DFE他们结构很相似，所以可以集成在一起。
+因为 FFE、Volterra 均衡器、DFE 他们结构很相似，所以可以集成在一起。
 
-我在这里举个简单例子，传输的是PAM信号。
+我在这里举个简单例子，传输的是 PAM 信号。
 
 ### 1. 前馈均衡器（Feed Forward Equalizer，FFE）
 
@@ -319,27 +282,15 @@ end
 
 **结果**
 
-1. 对比LMS和RLS的收敛效果和训练过程。信噪比设置为15dB。从下图中可以看出：均衡器抽头基本是一致的；RLS算法要LMS算法更快收敛。
+1. 对比 LMS 和 RLS 的收敛效果和训练过程。信噪比设置为 15dB。从下图中可以看出：均衡器抽头基本是一致的；RLS 算法要 LMS 算法更快收敛。
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/image-20230827155656374.png">
-    <br>
-</center>
-</div>
+​![image-20230827155656374](assets/image-20230827155656374-20230827165244-20kyfnn.png)​
 
-2. FFE的误码率性能随着信噪比的变化而变化。两种算法的效果是很相近的。（信噪比单位dB）
+2. FFE 的误码率性能随着信噪比的变化而变化。两种算法的效果是很相近的。（信噪比单位 dB）
 
-<div>
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"  src="均衡器（均衡算法）Equalizer.assets/image-20230827155725140.png">
-    <br>
-</center>
-</div>
+![image-20230827155725140](assets/image-20230827155725140-20230827165258-sm4jofm.png)
 
-### 2. 判决反馈均衡器（Decision Feedback Equalizer，DFE）、volterra均衡器
+### 2. 判决反馈均衡器（Decision Feedback Equalizer，DFE）、volterra 均衡器
 
 一起集成到一个函数中了
 
@@ -760,15 +711,15 @@ end
 end
 ```
 
-## 四、BER比较与分析
+## 四、BER 比较与分析
 
 > 因为没有实验或仿真数据，有些均衡器的性能就没有办法展示给大家看。
 > 如果大家想要了解的话，可以私聊我提供数据，跑一下结果。
 
-### 1.matlab仿真
+### 1.matlab 仿真
 
 ### 2.结果
 
 ## 五、参考文献
 
-参考books文件夹中的书籍以及课程。
+参考 books 文件夹中的书籍以及课程。
