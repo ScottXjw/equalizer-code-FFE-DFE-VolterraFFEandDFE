@@ -1,6 +1,5 @@
 # README
-
-[![Stargazers over time](https://starchart.cc/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE.svg)](https://starchart.cc/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE)
+[![Star History Chart](https://api.star-history.com/svg?repos=ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE&type=Date)](https://star-history.com/#ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE&Date)
 
 
 # 均衡器（均衡算法）Equalizer
