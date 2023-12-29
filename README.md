@@ -1,5 +1,8 @@
 # README
 
+[![Stargazers over time](https://starchart.cc/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE.svg)](https://starchart.cc/ScottXjw/equalizer-code-FFE-DFE-VolterraFFEandDFE)
+
+
 # 均衡器（均衡算法）Equalizer
 
 这个项目的主要目的是分享通信系统中基于训练序列的一些均衡器（均衡算法），以及一些自己的看法、经验。
